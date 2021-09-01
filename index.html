@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consuming API</title>
+</head>
+<body>
+    <main></main>
+</body>
+<script>
+    async function getContent(){
+        try{
+            const content = await fetch("http://localhost:4567/")
+            const data = await content.json()
+            console.log(data)
+            show(data)
+        }catch(err){
+            console.error(err)
+            return (`Ocorreu um erro: ${err}`)
+        }
+        
+    }
+    getContent()
+
+    function show(data){
+        const lista = document.createElement("ol")
+        let output = ""
+        for(let i of data){
+            output+= `<li>${i.name}</li>`
+        }
+        document.querySelector("main").innerHTML = output
+    }
+
+     
+</script>
+</html>
